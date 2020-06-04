@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<Tab text="Chart" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SortVisualisation.Controller.Chart.ChartController">
+    <VBox>
+      <LineChart id="lineChart" prefHeight="414.0" prefWidth="679.0" title="Chart">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" label="length of array" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" label="Time (in milliseconds)"/>
+        </yAxis>
+      </LineChart>
+        <HBox alignment="CENTER_LEFT" prefHeight="40.0" VBox.vgrow="ALWAYS">
+            <Region prefHeight="11.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnStartPause" disable="true" mnemonicParsing="false"  prefHeight="37.0" prefWidth="200.0" text="Start">
+                <HBox.margin>
+                    <Insets left="20.0" right="100.0" />
+                </HBox.margin>
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Button>
+            <Label layoutX="100.0" layoutY="100.0" text="Number of bars:">
+                <HBox.margin>
+                    <Insets right="15.0" />
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="fldInput" prefWidth="70.0" />
+            <Button fx:id="btnInput" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"  text="Generate">
+                <HBox.margin>
+                    <Insets left="20.0" />
+                </HBox.margin>
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Button>
+            <padding>
+                <Insets left="48.0" />
+            </padding>
+        </HBox>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </VBox>
+</Tab>
