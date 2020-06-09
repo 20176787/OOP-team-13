@@ -38,11 +38,6 @@ public class RadixSort extends AbstractSort{
     public boolean isFinished() {
         return isFinished;
     }
-    private void swapValues(int index1, int index2) {
-        int temp = sortArray[index1];
-        sortArray[index1] = sortArray[index2];
-        sortArray[index2] = temp;
-    }
     private static int maxValue(int nums[], int n) {
         int maxValue = nums[0];
         for (int i = 1; i < n; i++)

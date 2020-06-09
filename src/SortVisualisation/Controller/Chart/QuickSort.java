@@ -1,14 +1,6 @@
 package SortVisualisation.Controller.Chart;
 
 public class QuickSort {
-
-    /**
-     * The main function that implements Quick Sort
-     *
-     * @param nums nums to be sorted
-     * @param begin starting index
-     * @param end   ending index
-     */
     public static void sort(int nums[], int begin, int end) {
         if (begin < end) {
             // pi is partitioning index, arr[pi] is now at right place

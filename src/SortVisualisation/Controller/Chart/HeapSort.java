@@ -1,11 +1,6 @@
 package SortVisualisation.Controller.Chart;
 
 public class HeapSort {
-
-    /**
-     * The main method that implements heap
-     * @param nums
-     */
     public static void sort(int nums[]) {
         int n = nums.length;
         // Build heap (rearrange nums)

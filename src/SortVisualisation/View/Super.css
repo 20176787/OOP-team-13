@@ -1,14 +1,14 @@
 .root {
-    -fx-background-color: #EEFCFC;
+    -fx-background-color: #F1F3DC;
 }
 
 .BarChart-default {
-    -fx-background-color: #BDDCEE;
+    -fx-background-color: #8b8b8b;
 }
-
+.
 .BarChart-selected {
-    -fx-background-color: #222222;
+    -fx-background-color: #ff0000;
 }
 .BarChart-selected1 {
-    -fx-background-color: #ff0000;
+    -fx-background-color: #ffc700;
 }

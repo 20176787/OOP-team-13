@@ -12,30 +12,20 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-public class SuperController extends Application {
+public class MainController extends Application {
 
     @FXML private TabPane tabPane;
-
     public static void bootSuperController(String[] args) {
-        SuperController.launch(args);
+        MainController.launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("From Viet Nhat C with love <3");
-        Parent root = FXMLLoader.load(getClass().getResource("../View/Super.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/Example.fxml"));
         stage.setScene(new Scene(root, 1000, 500));
         stage.show();
     }
-
-
-    /**
-     * This method is automatically invoked when an fxml file, that points to this
-     * Controller, is loaded.
-     *
-     * This method then uses the dynamicLoadSceneTabs method to load extra tabs,
-     * defined in fxml files, located in the SortVisualisation.View.Tabs package.
-     */
     @SuppressWarnings("unused")
     public void initialize() {
         try {
@@ -52,6 +42,11 @@ public class SuperController extends Application {
         File[] listOfFiles = folder.listFiles((File f) -> {
             return f.getName().endsWith(".fxml");
         });
+        tabPane.getTabs().add(
+                FXMLLoader.load(
+                        new URL(getClass().getResource("../View/Home/") + "Home.fxml")
+                )
+        );
         for (File file : listOfFiles) {
             System.out.println("Loaded fxml Tab file:"+getClass().getResource("../View/Tabs/"+file.getName()));
             tabPane.getTabs().add(
@@ -60,10 +55,5 @@ public class SuperController extends Application {
                 )
             );
         }
-        tabPane.getTabs().add(
-                FXMLLoader.load(
-                        new URL(getClass().getResource("../View/Chart/") + "Chart.fxml")
-                )
-        );
     }
 }

@@ -12,8 +12,6 @@ public class ChartDataManager {
     private BarChart barChart;
     private XYChart.Series<String, Integer> chartDataSeries;
     private LinkedList<Node> selectedNodes;
-
-
     public ChartDataManager(BarChart initializedBarChart) throws IllegalArgumentException {
         if (initializedBarChart == null) {
             throw new IllegalArgumentException("instance of BarChart must be initialized.");

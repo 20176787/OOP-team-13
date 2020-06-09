@@ -60,6 +60,9 @@ public class HeapSort extends AbstractSort{
         }
 
         private void recursiveHeapSort(int[] inputArray, int i, int m) throws InterruptedException {
+            if (inputArray == null || inputArray.length == 0 )
+                return;
+            blockToStepsSemaphore.acquire();
             int largest = i;
             int l=2*i+1;
             int r=2*i+2;
@@ -81,8 +84,8 @@ public class HeapSort extends AbstractSort{
                 int swap = inputArray[i];
                 inputArray[i] = inputArray[largest];
                 inputArray[largest] = swap;
-
                 // Recursively heapify the affected sub-tree
+                blockToStepsSemaphore.acquire();
                 recursiveHeapSort(inputArray, largest, m);
             }
         }

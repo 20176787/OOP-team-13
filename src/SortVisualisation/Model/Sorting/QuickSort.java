@@ -3,17 +3,11 @@ package SortVisualisation.Model.Sorting;
 import SortVisualisation.Model.Pointer;
 
 import java.util.concurrent.Semaphore;
-
-/**
- * Created by peterzen on 2017-03-05.
- * Part of the big-java-assignment-sorting project.
- * With the help of: http://www.programcreek.com/2012/11/quicksort-array-in-java/
- */
 public class QuickSort extends AbstractSort {
     private int arrLength;
     private boolean isFinished = false;
     private Pointer pointer;
-    private SteppableThread steppableThread;
+    private StepThread stepThread;
     private static final Semaphore blockToStepsSemaphore = new Semaphore(0);
 
     public QuickSort(int[] sortArray) {
@@ -30,9 +24,9 @@ public class QuickSort extends AbstractSort {
 
     @Override
     public int[] sortOneStep() {
-        if (steppableThread == null) {
-            steppableThread = new SteppableThread();
-            steppableThread.start();
+        if (stepThread == null) {
+            stepThread = new StepThread();
+            stepThread.start();
         } else {
             blockToStepsSemaphore.release(); // release a semaphore permit so the SteppableThread stops blocking
         }
@@ -51,7 +45,7 @@ public class QuickSort extends AbstractSort {
         sortArray[index2] = temp;
     }
 
-    private class SteppableThread extends Thread {
+    private class StepThread extends Thread {
 
         private int selectPivot(int[] inputArray, int fromIndex, int toIndex) {
             int pivotIndex = fromIndex + (toIndex - fromIndex) / 2;

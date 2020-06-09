@@ -29,7 +29,7 @@
                     layoutX="10.0"
                     layoutY="10.0"
                     mnemonicParsing="false"
-                    text="+1 Step"
+                    text="Step"
                     fx:id="btnOneStep"
                     onAction="#visualiseOneSortingStep">
                 <font>

@@ -2,10 +2,6 @@ package SortVisualisation.Model.Sorting;
 
 import SortVisualisation.Model.Pointer;
 
-/**
- * Created by femkeh on 02/03/17.
- * Part of the big-java-assignment-sorting project.
- */
 public class BubbleSort extends AbstractSort {
     private boolean counting = false; // are we counting no-swaps from the start index?
     private int noSwaps = 0;
@@ -16,7 +12,6 @@ public class BubbleSort extends AbstractSort {
         super(unsortedArray);
         this.length = unsortedArray.length;
     }
-
     @Override
     public Pointer getPointer() {
         return new Pointer(new int[]{pointer, pointer + 1});

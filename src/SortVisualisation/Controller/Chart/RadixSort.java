@@ -3,12 +3,6 @@ package SortVisualisation.Controller.Chart;
 import java.util.Arrays;
 
 public class RadixSort {
-
-    /**
-     * The main function that sorts nums
-     *
-     * @param nums
-     */
     public static void sort(int nums[]) {
         int n = nums.length;
         // Find the maximum number to know number of digits
@@ -52,7 +46,6 @@ public class RadixSort {
         // Store count of occurrences in count[]
         for (i = 0; i < n; i++)
             count[(nums[i] / exp) % 10]++;
-
         // Change count[i] so that count[i] now contains
         // actual position of this digit in output[]
         for (i = 1; i < 10; i++)
@@ -63,7 +56,6 @@ public class RadixSort {
             output[count[(nums[i] / exp) % 10] - 1] = nums[i];
             count[(nums[i] / exp) % 10]--;
         }
-
         // Copy the output nums to nums[], so that nums[] now
         // contains sorted numbers according to current digit
         for (i = 0; i < n; i++)

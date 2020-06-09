@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<Tab text="Chart" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SortVisualisation.Controller.Chart.ChartController">
+<?import javafx.scene.control.*?>
+<Tab text="Chart"  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SortVisualisation.Controller.Chart.ChartController">
     <VBox>
-      <LineChart id="lineChart" prefHeight="414.0" prefWidth="679.0" title="Chart">
+      <LineChart fx:id="LineChart" prefHeight="414.0" prefWidth="679.0" title="Chart">
         <xAxis>
-          <CategoryAxis side="BOTTOM" label="length of array" />
+          <CategoryAxis label="length of array" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" label="Time (in milliseconds)"/>
+          <NumberAxis label="Time (in milliseconds)" side="LEFT" />
         </yAxis>
       </LineChart>
         <HBox alignment="CENTER_LEFT" prefHeight="40.0" VBox.vgrow="ALWAYS">
             <Region prefHeight="11.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="btnStartPause" disable="true" mnemonicParsing="false"  prefHeight="37.0" prefWidth="200.0" text="Start">
+            <Button fx:id="btnStartPause" disable="false" mnemonicParsing="false" onAction="#startRunningChart" prefHeight="37.0" prefWidth="200.0" text="Start">
                 <HBox.margin>
                     <Insets left="20.0" right="100.0" />
                 </HBox.margin>
@@ -26,13 +33,15 @@
                     <Font size="16.0" />
                 </font>
             </Button>
-            <Label layoutX="100.0" layoutY="100.0" text="Number of bars:">
+         <Label prefHeight="15.0" prefWidth="34.0" text="Step" />
+         <TextField fx:id="fldInput1" prefWidth="70.0" />
+            <Label layoutX="100.0" layoutY="100.0" prefHeight="20.0" prefWidth="51.0" text="End Ranger">
                 <HBox.margin>
                     <Insets right="15.0" />
                 </HBox.margin>
             </Label>
             <TextField fx:id="fldInput" prefWidth="70.0" />
-            <Button fx:id="btnInput" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"  text="Generate">
+            <Button fx:id="btnInput" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#visualiseInputChart" text="Generate">
                 <HBox.margin>
                     <Insets left="20.0" />
                 </HBox.margin>

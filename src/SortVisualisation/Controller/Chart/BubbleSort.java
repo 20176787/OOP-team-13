@@ -2,10 +2,6 @@ package SortVisualisation.Controller.Chart;
 
 public class BubbleSort {
 
-    /**
-     * Main method that implement sort algorithm
-     * @param nums arrays of nums
-     */
     public static void sort(int[] nums) {
     	int n = nums.length;  
         int temp = 0;  

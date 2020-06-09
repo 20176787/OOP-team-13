@@ -1,11 +1,6 @@
 package SortVisualisation.Model;
 
 import java.util.LinkedList;
-
-/**
- * Created by peterzen on 2017-03-06.
- * Part of the big-java-assignment-sorting project.
- */
 public class Pointer {
     private LinkedList<Integer> indices;
 

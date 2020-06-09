@@ -1,5 +1,6 @@
 package SortVisualisation.Controller;
 
+//import SortVisualisation.Controller.Chart.ChartController;
 import SortVisualisation.Model.ChartDataManager;
 import SortVisualisation.Model.Pointer;
 import SortVisualisation.Model.RandomGen;
@@ -13,11 +14,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-
-/**
- * Created by peterzen on 2017-03-06.
- * Part of the big-java-assignment-sorting project.
- */
 public abstract class AbstractSortController {
     @FXML
     protected Slider sldrDelay;
@@ -34,37 +30,46 @@ public abstract class AbstractSortController {
     @FXML
     protected LineChart lineChart;
     @FXML
-
+    protected LineChart<String,Number> LineChart;
+    @FXML
     protected TextField fldInput;
-
+//    protected ChartController chartController;
     protected ChartDataManager chartData;
     protected int[] unsortedIntegers;
     protected AbstractSort sorter;
     protected SortingThread sortingThread;
-
+    protected int Data;
+    protected int startRange = 0;
+    protected int endRange   = 1000;
+    protected int step       = 100;
     protected void visualiseInput(ActionEvent actionEvent) {
         // @TODO: fix proper error handling
         if (!textFieldHasValidInt(fldInput)) {
             System.out.println("Error: You have not entered a number for how many bars you would like to see.");
             return;
         }
-
         // generate the random integers collection
         unsortedIntegers = RandomGen.generateRandomInts(Integer.parseInt(fldInput.getText()));
-
         // update the barChart
         updateBarChartData();
-
         // reset our SortingThread
         sortingThread = null;
         btnStartPause.setText("Start");
-
         // unlock the sorting buttons
         btnStartPause.disableProperty().setValue(false);
         btnOneStep.disableProperty().setValue(false);
-
         System.out.println(btnInput.getText() + " == Done");
     }
+    @FXML
+//    protected void visualiseInputChart(ActionEvent actionEvent){
+//        if (!textFieldHasValidInt(fldInput)) {
+//            System.out.println("Error: You have not entered a number for how many bars you would like to see.");
+//            return;
+//        }
+//        this.Data=Integer.parseInt(fldInput.getText());
+//        endRange=Integer.parseInt(fldInput.getText());
+//
+//    }
 
     public void updateDelaySlider(Event event) {
         if (textFieldHasValidInt(fldDelay)) {
@@ -97,7 +102,6 @@ public abstract class AbstractSortController {
 
         System.out.println(btnStartPause.getText() + " == Done");
     }
-
     public void visualiseOneSortingStep(ActionEvent actionEvent) {
         // perform one sorting step on our unsorted array
         unsortedIntegers = sorter.sortOneStep();
@@ -105,7 +109,6 @@ public abstract class AbstractSortController {
 
         // set styling for bars that are being compared
         updateBarChartSelected();
-
         System.out.println(btnOneStep.getText() + " == Done");
     }
 
@@ -131,14 +134,12 @@ public abstract class AbstractSortController {
         chartData.load();
         chartData.styleChartData("BarChart-default");
     }
-
     protected void updateBarChartSelected() {
         chartData.clearSelectedNodes();
         Pointer pointer = sorter.getPointer();
-//        pointer.getIndices().forEach(i -> chartData.selectNode(i));
-        chartData.selectNode(pointer.getIndices().get(0));
-        chartData.selectNode(pointer.getIndices().get(1));
-        chartData.selectNodeKey(pointer.getIndices().get(2));
+        if( pointer.getIndices()!=null)
+            pointer.getIndices().forEach(i -> chartData.selectNode(i));
+        System.out.println("huy"+pointer.getIndices());
     }
 
     private class SortingThread extends Thread {
@@ -148,7 +149,7 @@ public abstract class AbstractSortController {
         public void run() {
             while (!sorter.isFinished()) {
                 while (!running) {
-               //     yield();
+                   yield();
                 }
 
                 unsortedIntegers = sorter.sortOneStep();

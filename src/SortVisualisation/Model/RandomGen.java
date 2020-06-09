@@ -2,11 +2,6 @@ package SortVisualisation.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-/**
- * Created by femkeh on 02/03/17.
- * Part of the big-java-assignment-sorting project.
- */
 public class RandomGen {
     public static int[] generateRandomInts(int max) {
         int[] intSeries = new int[max];
