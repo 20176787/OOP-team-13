@@ -1,9 +1,7 @@
 package SortVisualisation.Model.Sorting;
-
 import SortVisualisation.Model.Pointer;
 
 import java.util.concurrent.Semaphore;
-
 public class HeapSort extends AbstractSort{
     private int arrLength;
     private boolean isFinished = false;
@@ -20,19 +18,17 @@ public class HeapSort extends AbstractSort{
     public Pointer getPointer() {
         return pointer;
     }
-
     @Override
     public int[] sortOneStep() {
         if (stepThread == null) {
             stepThread = new StepThread();
             stepThread.start();
         } else {
-            blockToStepsSemaphore.release(); // release a semaphore permit so the SteppableThread stops blocking
+            blockToStepsSemaphore.release();
         }
 
         return sortArray;
     }
-
     @Override
     public boolean isFinished() {
         return isFinished;
@@ -52,7 +48,6 @@ public class HeapSort extends AbstractSort{
                     swapValues(0,i);
                     recursiveHeapSort(sortArray,0,i);
                 }
-                // if we get here, we can assume the quickSort finished
               isFinished = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -73,18 +68,15 @@ public class HeapSort extends AbstractSort{
                 pointer.updateIndex(2, largest);
                 blockToStepsSemaphore.acquire();
             }
-            // If right child is larger than largest so far
             if (r < m && inputArray[r] > inputArray[largest]) {
                 largest = r;
                 pointer.updateIndex(2, largest);
                 blockToStepsSemaphore.acquire();
             }
-            // If largest is not root
             if (largest != i) {
                 int swap = inputArray[i];
                 inputArray[i] = inputArray[largest];
                 inputArray[largest] = swap;
-                // Recursively heapify the affected sub-tree
                 blockToStepsSemaphore.acquire();
                 recursiveHeapSort(inputArray, largest, m);
             }

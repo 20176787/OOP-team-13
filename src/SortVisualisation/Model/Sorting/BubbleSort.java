@@ -1,11 +1,8 @@
 package SortVisualisation.Model.Sorting;
-
 import SortVisualisation.Model.Pointer;
-
 import java.util.concurrent.Semaphore;
-
 public class BubbleSort extends AbstractSort {
-    private boolean counting = false; // are we counting no-swaps from the start index?
+    private boolean counting = false;
     private int noSwaps = 0;
     private boolean isFinished = false;
     private int arrLength;
@@ -27,12 +24,10 @@ public class BubbleSort extends AbstractSort {
             stepThread = new StepThread();
             stepThread.start();
         } else {
-            blockToStepsSemaphore.release(); // release a semaphore permit so the SteppableThread stops blocking
+            blockToStepsSemaphore.release();
         }
-
         return sortArray;
     }
-
     @Override
     public boolean isFinished() {
         return isFinished;
@@ -52,14 +47,12 @@ public class BubbleSort extends AbstractSort {
                         recursiveBubbleSort(sortArray,i,j);
 
                     }
-                // if we get here, we can assume the quickSort finished
                 isFinished = true;
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
         private void recursiveBubbleSort(int[] inputArray, int i, int j) throws InterruptedException {
             if (inputArray == null || inputArray.length == 0 )
                 return;
@@ -67,9 +60,7 @@ public class BubbleSort extends AbstractSort {
             if(inputArray[j]>inputArray[j+1])
             {
                 swapValues(j,j+1);
-//                pointer.updateIndex(0, leftPointer);
                 blockToStepsSemaphore.acquire();
-
             }
             blockToStepsSemaphore.acquire();
         }

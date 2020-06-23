@@ -1,6 +1,4 @@
 package SortVisualisation.Controller;
-
-//import SortVisualisation.Controller.Chart.ChartController;
 import SortVisualisation.Model.ChartDataManager;
 import SortVisualisation.Model.Pointer;
 import SortVisualisation.Model.RandomGen;
@@ -33,7 +31,6 @@ public abstract class AbstractSortController {
     protected LineChart<String,Number> LineChart;
     @FXML
     protected TextField fldInput;
-//    protected ChartController chartController;
     protected ChartDataManager chartData;
     protected int[] unsortedIntegers;
     protected AbstractSort sorter;
@@ -48,45 +45,27 @@ public abstract class AbstractSortController {
             System.out.println("Error: You have not entered a number for how many bars you would like to see.");
             return;
         }
-        // generate the random integers collection
         unsortedIntegers = RandomGen.generateRandomInts(Integer.parseInt(fldInput.getText()));
-        // update the barChart
         updateBarChartData();
-        // reset our SortingThread
         sortingThread = null;
         btnStartPause.setText("Start");
-        // unlock the sorting buttons
         btnStartPause.disableProperty().setValue(false);
         btnOneStep.disableProperty().setValue(false);
         System.out.println(btnInput.getText() + " == Done");
     }
     @FXML
-//    protected void visualiseInputChart(ActionEvent actionEvent){
-//        if (!textFieldHasValidInt(fldInput)) {
-//            System.out.println("Error: You have not entered a number for how many bars you would like to see.");
-//            return;
-//        }
-//        this.Data=Integer.parseInt(fldInput.getText());
-//        endRange=Integer.parseInt(fldInput.getText());
-//
-//    }
-
     public void updateDelaySlider(Event event) {
         if (textFieldHasValidInt(fldDelay)) {
             sldrDelay.setValue(Double.parseDouble(fldDelay.getText()));
         }
     }
-
     public void updateDelayField(Event event) {
         Double value = sldrDelay.getValue();
         fldDelay.setText(value.intValue() + "");
     }
-
     public void startOrPauseSorting(ActionEvent actionEvent) {
         if (btnStartPause.getText().equals("Start")) {
             btnStartPause.setText("Pause");
-
-            // start the SortingThread
             if (sortingThread == null) {
                 sortingThread = new SortingThread();
                 sortingThread.start();
@@ -95,19 +74,14 @@ public abstract class AbstractSortController {
             }
         } else {
             btnStartPause.setText("Start");
-
-            // pause the SortingThread
             sortingThread.running = false;
         }
 
         System.out.println(btnStartPause.getText() + " == Done");
     }
     public void visualiseOneSortingStep(ActionEvent actionEvent) {
-        // perform one sorting step on our unsorted array
         unsortedIntegers = sorter.sortOneStep();
         updateBarChartData();
-
-        // set styling for bars that are being compared
         updateBarChartSelected();
         System.out.println(btnOneStep.getText() + " == Done");
     }
@@ -118,7 +92,6 @@ public abstract class AbstractSortController {
             delay = Integer.parseInt(fldDelay.getText());
         return delay;
     }
-
     protected boolean textFieldHasValidInt(TextField fldText) {
         try {
             int i = Integer.parseInt(fldText.getText());
@@ -137,21 +110,23 @@ public abstract class AbstractSortController {
     protected void updateBarChartSelected() {
         chartData.clearSelectedNodes();
         Pointer pointer = sorter.getPointer();
-        if( pointer.getIndices()!=null)
-            pointer.getIndices().forEach(i -> chartData.selectNode(i));
-        System.out.println("huy"+pointer.getIndices());
-    }
+        if( pointer.getIndices()!=null) {
+            pointer.getIndices().forEach(i ->{
+                if(pointer.getIndices().size()==1)
+                    chartData.selectNode2(i);
+                else chartData.selectNode(i);
+            });
 
+        }
+    }
     private class SortingThread extends Thread {
         private volatile boolean running = true;
-
         @Override
         public void run() {
             while (!sorter.isFinished()) {
                 while (!running) {
                    yield();
                 }
-
                 unsortedIntegers = sorter.sortOneStep();
                 Platform.runLater(() -> {
                     updateBarChartData();
